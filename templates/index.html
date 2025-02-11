@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Business Card Scanner</h1>
+        <div class="upload-section">
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="ocrEngine">Select OCR Engine:</label>
+                    <select id="ocrEngine" name="ocrEngine">
+                        <option value="google_vision">Google Cloud Vision</option>
+                        <option value="tesseract">Tesseract</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="cardImage" accept=".jpg,.jpeg,.png" required>
+                </div>
+                <div id="imagePreview" class="image-preview"></div>
+                <button type="submit">Scan Card</button>
+            </form>
+        </div>
+        <div id="result" class="result-section">
+            <div id="structuredData"></div>
+            <div id="rawText" class="raw-text"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
