@@ -239,6 +239,30 @@ The application includes error handling for:
 4. Push to the branch
 5. Create a Pull Request
 
+## Commitizen
+
+This project uses Commitizen for commit messages. To commit, you'll have to install commitizen and setup husky:
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Initialize husky:
+
+   ```bash
+   npx husky install
+   ```
+
+3. Commit using Commitizen:
+
+   ```bash
+    git commit
+    # or
+    npm run commit
+   ```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
