@@ -42,4 +42,8 @@ scans/generated/
 *.jpg
 *.jpeg
 *.png
-*.json 
+*.json
+
+# Node
+node_modules/
+!package.json

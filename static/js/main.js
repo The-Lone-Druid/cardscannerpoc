@@ -1,7 +1,11 @@
+let currentRotation = 0;
+
 // Add image preview functionality
 document.getElementById('cardImage').addEventListener('change', function(e) {
     const imagePreview = document.getElementById('imagePreview');
+    const rotationControls = document.getElementById('rotationControls');
     imagePreview.innerHTML = ''; // Clear previous preview
+    currentRotation = 0; // Reset rotation
     
     if (e.target.files && e.target.files[0]) {
         const reader = new FileReader();
@@ -11,12 +15,26 @@ document.getElementById('cardImage').addEventListener('change', function(e) {
             img.src = e.target.result;
             imagePreview.appendChild(img);
             imagePreview.style.display = 'block';
+            rotationControls.style.display = 'block';
         }
         
         reader.readAsDataURL(e.target.files[0]);
     } else {
         imagePreview.style.display = 'none';
+        rotationControls.style.display = 'none';
     }
+});
+
+// Add rotation event listeners
+document.querySelectorAll('.rotate-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const degrees = parseInt(this.dataset.degrees);
+        const img = document.querySelector('#imagePreview img');
+        if (img) {
+            currentRotation = (currentRotation + degrees) % 360;
+            img.style.transform = `rotate(${currentRotation}deg)`;
+        }
+    });
 });
 
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
@@ -36,6 +54,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('ocr_engine', ocrEngine.value);
+    formData.append('rotation', currentRotation); // Add rotation angle
     
     try {
         resultDiv.style.display = 'block';
